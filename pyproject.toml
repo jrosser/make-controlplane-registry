@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "make-controlplane-registry"  
+version = "0.0.1"
+description = "Registry to deploy airgapped controlplane"
+authors = ["Mohammed Naser <mnaser@vexxhost.com>"]
+license = "Apache-2.0"
+packages = [{include = "make_controlplane_registry"}]
+
+[tool.poetry.dependencies]
+certifi = "*"
+click = ">=8.0.4"
+pykube-ng = "*"
+pyroute2 = ">=0.3.4"
+python = "^3.6"
+requests = ">=2.27.1"
+semver = "^2.0.0"
+shortuuid = "*"
+diskcache = ">=5.6.1"
+platformdirs = ">=2.4.0"
+
+[build-system]
+requires = ["setuptools", "poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+make-controlplane-registry-image-loader = "make_controlplane_registry.cmd.image_loader:main"
