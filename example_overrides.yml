@@ -1,0 +1,44 @@
+#local mirror and registry locations
+capi_offline_mirror: https://www.example.com/capi/
+capi_offline_registry: 192.168.1.100:5001
+
+#binaries required to build k8s cluster
+runc_download_url: "{{ capi_offline_mirror ~ 'runc.amd64' }}"
+containerd_download_url: "{{ capi_offline_mirror ~ 'containerd-1.7.0-linux-amd64.tar.gz' }}"
+kubeadm_download_url: "{{ capi_offline_mirror ~ 'kubeadm' }}"
+kubectl_download_url: "{{ capi_offline_mirror ~ 'kubectl' }}"
+cri_tools_crictl_download_url: "{{ capi_offline_mirror ~ 'crictl-v1.25.0-linux-amd64.tar.gz' }}"
+cri_tools_critest_download_url: "{{ capi_offline_mirror ~ 'critest-v1.25.0-linux-amd64.tar.gz' }}"
+cni_plugins_download_url: "{{ capi_offline_mirror ~ 'cni-plugins-linux-amd64-v1.2.0.tgz' }}"
+kubelet_download_url: "{{ capi_offline_mirror ~ 'kubelet' }}"
+
+#k8s images
+kubernetes_image_repository: "{{ capi_offline_registry }}"
+
+#containerd images
+containerd_pause_image: "{{ capi_offline_registry }}/pause:3.5"
+containerd_insecure_registries:
+ - "{{ capi_offline_registry }}"
+
+#helm binaries
+helm_download_url: "{{ capi_offline_mirror ~ 'helm-v3.11.2-linux-amd64.tar.gz' }}"
+helm_diff_download_url: "{{ capi_offline_mirror ~ 'helm-diff-linux-amd64.tgz' }}"
+
+#cilium images
+cilium_node_image: "{{ capi_offline_registry }}/cilium:v1.13.3@sha256:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314"
+cilium_operator_image: "{{ capi_offline_registry}}/operator-generic:v1.13.3@sha256:fa7003cbfdf8358cb71786afebc711b26e5e44a2ed99bd4944930bba915b8910"
+
+#cert manager images
+cert_manager_image_cli: "{{capi_offline_registry }}/cert-manager-ctl:v1.12.2"
+cert_manager_image_controller: "{{capi_offline_registry }}/cert-manager-controller:v1.12.2"
+cert_manager_image_cainjector: "{{capi_offline_registry }}/cert-manager-cainjector:v1.12.2"
+cert_manager_image_webhook: "{{capi_offline_registry }}/cert-manager-webhook:v1.12.2"
+
+#clusterctl binaries
+clusterctl_download_url: "{{ capi_offline_mirror ~ 'clusterctl-linux-amd64' }}"
+
+#tell clusterctl where the local registry is
+clusterctl_config:
+  images:
+    all:
+      repository: "{{ capi_offline_registry }}"
